@@ -1,0 +1,79 @@
+<div class="container">
+  <div class="head-bar">
+    {{ questData.startTime }}~{{ questData.endTime }}
+    <h1 class="questionnaire-title">{{ questData.name }}</h1>
+    {{ questData.description }}
+  </div>
+
+  <div class="respondent-section">
+    <div class="input-bar">
+      <label for="name">姓名:</label>
+      <span>{{ questData.userName }}</span>
+    </div>
+    <br />
+    <div class="input-bar">
+      <label for="phone">手機:</label>
+      <span>{{ questData.userPhone }}</span>
+    </div>
+    <br />
+    <div class="input-bar">
+      <label for="email">E-mail:</label>
+      <span>{{ questData.userEmail }}</span>
+    </div>
+    <br />
+    <div class="input-bar">
+      <label for="age">年齡:</label>
+      <span>{{ questData.userAge }}</span>
+    </div>
+  </div>
+  <hr />
+  <!-- 題目區 -->
+  <div class="quest-section">
+    @for(quest of questData.questArray ;track $index){
+    <h4 style="margin-bottom: 15px">{{ quest.question }}</h4>
+    @if (quest.required) {
+    <p style="color: red">*必填</p>
+    }
+    <!-- 單選題 -->
+    @if(quest.type === "single"){
+    <div class="quest-box">
+      @if(quest.radioAnswer){ @for(option of quest.options;track $index){
+      @if(quest.radioAnswer ==option.value){
+      <h4>{{ option.label }}</h4>
+      <br />
+      } } } @else {
+      <h4>無</h4>
+      }
+    </div>
+    }
+    <!-- 多選題 -->
+    @if(quest.type === "multiple"){
+    <div class="quest-box">
+      <ol>
+        @for(option of quest.options ; track $index){
+        @if(option.checkboxAnswer){
+        <li>
+          <h4>{{ option.label }}</h4>
+        </li>
+        } }
+      </ol>
+    </div>
+    }
+    <!-- 簡答題 -->
+    @if(quest.type === "text"){
+    <div class="quest-box">
+      @if(quest.textAnswer){
+      <h4>{{ quest.textAnswer }}</h4>
+      } @else{
+      <h4>無</h4>
+      }
+    </div>
+    } }
+    <div class="btn-group" role="group" aria-label="Basic example">
+      <button class="btn revise-btn" (click)="toQuest()">修改答案</button>
+      <button type="button" class="btn submit-btn" (click)="toSubmit()">
+        提交問卷
+      </button>
+    </div>
+  </div>
+</div>

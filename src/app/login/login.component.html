@@ -1,0 +1,91 @@
+<div class="container-fluid">
+  @if(!admin.isAdmin){
+  <form class="form-group" [formGroup]="loginForm">
+    <h3>登入</h3>
+    <!-- email -->
+    <div class="form-field">
+      <label [class.floating]="isFloating('email')">請輸入Email</label>
+      <input
+        [placeholder]="emailFocused || formControls['email'].value? 'example@email.com': ' ' "
+        type="email"
+        id="email"
+        formControlName="email"
+        required
+        (focus)="emailFocused = true"
+        (blur)="onEmailBlur()"
+      />
+      @if(shouldShowError(formControls['email']) ){
+      @if(formControls['email'].errors?.['required']){
+      <span class="input-error">Email 為必填欄位</span>
+      } @if(formControls['email'].errors?.['pattern']){
+      <span class="input-error">請輸入正確的 Email 格式</span>
+      } }
+    </div>
+
+    <!-- 密碼 -->
+    <div class="form-field">
+      <label [class.floating]="isFloating('password')">請輸入密碼</label>
+      <input
+        [type]="hidePassword ? 'password' : 'text'"
+        id="password"
+        formControlName="password"
+        required
+        (focus)="passwordFocused = true"
+        (blur)="onPasswordBlur()"
+      />
+      <button class="visibility" (click)="changeVisibility()">
+        <mat-icon>{{
+          hidePassword ? "visibility_off" : "visibility"
+        }}</mat-icon>
+      </button>
+      <!-- 顯示錯誤文字 -->
+      @if(shouldShowError(formControls['password'])){
+      @if(formControls['password'].errors?.['required']){
+      <span class="input-error">密碼為必填欄位</span>
+      } }
+
+      <!-- 顯示密碼強度 -->
+      @if (formControls['password'].value) {
+      <p class="strength-message">
+        密碼強度:
+        <span class="{{ passwordStrength }}">{{
+          strengthMap[passwordStrength]
+        }}</span>
+      </p>
+      }
+    </div>
+
+    <!-- 確認密碼 -->
+    <div class="form-field">
+      <label [class.floating]="isFloating('confirmPassword')">確認密碼</label>
+      <input
+        [type]="hidePassword ? 'password' : 'text'"
+        id="confirmpassword"
+        formControlName="confirmPassword"
+        required
+        (focus)="confirmPasswordFocused = true"
+        (blur)="onConfirmPasswordBlur()"
+      />
+      <button class="visibility" (click)="changeVisibility()">
+        <mat-icon>{{
+          hidePassword ? "visibility_off" : "visibility"
+        }}</mat-icon>
+      </button>
+      @if(showConfirmPasswordError()){
+      <span class="input-error">請確認與密碼是否相符</span>
+      }
+    </div>
+    <button type="button" class="btn login-btn" (click)="login()">
+      登入
+    </button>
+    <p class="login-error" [class.show]="showError">{{ loginError }}</p>
+  </form>
+}
+@if(admin.isAdmin){
+  <div class="admin-container">
+    <h1>管理員中心</h1>
+    <h2>你好 {{admin.savedEmail}}</h2>
+    <button class="btn btn-success" (click)=" logOut()">登出</button>
+  </div>
+}
+</div>

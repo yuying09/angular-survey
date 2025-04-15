@@ -1,0 +1,64 @@
+.head-bar{
+  padding: 30px;
+}
+
+.questionnaire-title{
+  text-align: center;
+  margin: 10px;
+}
+
+.respondent-section{
+  padding: 30px;
+
+  .input-bar{
+    margin-bottom: 10px;
+  }
+
+  label{
+    width: 80px;
+    margin-right: 30px;
+  }
+  input{
+    width: 80%;
+  }
+}
+
+.quest-section{
+  padding: 30px;
+  .quest-box{
+    margin-bottom: 30px;
+    margin-top: 15px
+
+    label{
+      font-size: 18px;
+    };
+
+    textarea{
+      width: 700px;
+      height: 200px;
+      resize:none;
+      overflow-y:visible;
+    }
+  }
+}
+
+.revise-btn{
+  background-color: #adb5bd;
+  color: #212529;
+
+  &:hover{
+    background-color: #6c757d;
+    color: #f8f9fa;
+    transform: translateY(-0.5px);
+  }
+}
+
+.submit-btn{
+  background: #219ebc;
+  color: #fff;
+
+  &:hover{
+    background: #1b8ca6;
+    transform: translateY(-0.5px);
+  }
+}

@@ -1,0 +1,191 @@
+<div class="container-fluid">
+  <div class="form-group">
+    @for(quest of questions ; track $index){
+    <div class="form-field">
+      <div class="form-card">
+        <label for="title">問卷標題</label>
+        <input
+          type="text"
+          placeholder="請輸入標題"
+          [(ngModel)]="quest.title"
+          id="title"
+          [class.error-border]="!!errorMessagesMap['title']"
+          (keyup)="handleFieldInput('title',quest.title)"
+        />
+      </div>
+      @if(errorMessagesMap['title']){
+      <br />
+      <p
+        class="error-text error-title"
+        [class.show]="errorAnimationMap.form!['title']"
+      >
+        {{ errorMessagesMap["title"] }}
+      </p>
+      }
+    </div>
+    <div class="form-field">
+      <div class="form-card">
+        <label for="desc" class="desc-label">問卷說明</label>
+        <textarea
+          type="text"
+          placeholder="此問卷是關於..."
+          id="desc"
+          [(ngModel)]="quest.desc"
+        >
+        </textarea>
+      </div>
+    </div>
+
+    <div class="form-field">
+      <div class="form-card">
+        <label for="startTime">開始日期</label>
+        <input
+          type="date"
+          id="startTime"
+          min="{{ today }}"
+          [(ngModel)]="quest.startTime"
+          (change)="handleFieldInput('startTime',quest.startTime)"
+        />
+      </div>
+      @if(errorMessagesMap['startTime']){
+      <br />
+      <p
+        class="error-text error-startTime"
+        [class.show]="errorAnimationMap.form!['startTime']"
+      >
+        {{ errorMessagesMap["startTime"] }}
+      </p>
+      }
+    </div>
+    <div class="form-field">
+      <div class="form-card">
+        <label for="endTime">結束日期</label>
+        <input
+          type="date"
+          id="endTime"
+          min="{{ quest.startTime }}"
+          [(ngModel)]="quest.endTime"
+          [class.error-border]="!!errorMessagesMap['endTime']"
+          (change)="handleFieldInput('endTime',quest.endTime)"
+        />
+      </div>
+      @if(errorMessagesMap['endTime']){
+      <br />
+      <p
+        class="error-text error-endTime"
+        [class.show]="errorAnimationMap.form!['endTime']"
+      >
+        {{ errorMessagesMap["endTime"] }}
+      </p>
+      }
+    </div>
+    }
+    <br />
+    @for(item of questions[0].questArray ;track $index; let qIndex= $index){
+    <div class="question-card">
+      <div class="form-field question-header">
+        <label class="question-num">第{{ qIndex + 1 }}題</label>
+        <input
+          type="text"
+          class="question-name-input"
+          placeholder="請輸入題目"
+          [(ngModel)]="item.questName"
+          (keyup)="handleQuestionInput(qIndex, 'questName', item.questName)"
+          [class.error-border]="!!errorMessagesMap.questionsError?.[qIndex]?.['questName']"
+        />
+        <select
+          id="type"
+          [(ngModel)]="item.type"
+          (change)="onTypeChange(qIndex)"
+          (change)="handleQuestionInput(qIndex, 'type', item.type)"
+          [class.error-border]="!!errorMessagesMap.questionsError?.[qIndex]?.['type']"
+        >
+          <option value="" disabled selected>--請選擇題型--</option>
+          <option value="single">單選題</option>
+          <option value="multiple">複選題</option>
+          <option value="text">簡答題</option>
+        </select>
+        <button class="delete-btn" (click)="removeQuestion(qIndex)">
+          <mat-icon class="delete-icon">close</mat-icon>
+        </button>
+      </div>
+
+      <div class="error-quest">
+        @if(errorMessagesMap.questionsError?.[qIndex]?.['questName']){
+        <p
+          class="error-text error-quest-name"
+          [class.show]="errorAnimationMap.questions![qIndex]['questName']"
+        >
+          {{errorMessagesMap.questionsError?.[qIndex]?.['questName']}}
+        </p>
+        } @if(errorMessagesMap.questionsError?.[qIndex]?.['type']){
+        <p
+          class="error-text error-quest-type"
+          [class.show]="errorAnimationMap.questions![qIndex]['type']"
+        >
+          {{errorMessagesMap.questionsError?.[qIndex]?.['type']}}
+        </p>
+        }
+      </div>
+      <div class="option-group">
+        @if(item.type === "single" || item.type === "multiple"){
+        <div class="option-list">
+          @for(option of item.options ; track $index ;let optIndex = $index){
+          <div class="option-row">
+            <input
+              class="choose-box"
+              [type]="item.type == 'single' ? 'radio' : 'checkbox'"
+            />
+            <input
+              type="text"
+              [(ngModel)]="item.options[optIndex]"
+              placeholder="選項{{ optIndex + 1 }}"
+              #optionInput
+              (keyup)="handleOptionInput(qIndex, 'options')"
+              [class.error-border]="!!errorMessagesMap.questionsError?.[qIndex]?.['options']"
+            />
+            <button class="delete-btn" (click)="removeOption(qIndex, optIndex)">
+              <mat-icon class="delete-icon">close</mat-icon>
+            </button>
+          </div>
+          } @if(errorMessagesMap.questionsError?.[qIndex]?.['options']){
+          <p
+            class="error-text error-options"
+            [class.show]="errorAnimationMap.questions![qIndex]['options']"
+          >
+            {{errorMessagesMap.questionsError?.[qIndex]?.['options']}}
+          </p>
+          }
+        </div>
+        <button
+          type="button"
+          class="btn add-btn"
+          (click)="addOption(qIndex)"
+        >
+          新增選項
+        </button>
+        }
+      </div>
+    </div>
+    }
+    <button
+      type="button"
+      class="btn add-btn"
+      (click)="addQuestion()"
+    >
+      新增題目
+    </button>
+    <button
+      type="button"
+      class="btn submit-btn"
+      (click)="onSubmit()"
+    >
+      提交表單
+    </button>
+    <button type="button" class="home-btn" matTooltip="回首頁"
+    [matTooltipShowDelay]="1000"
+  [matTooltipPosition]="'left'" routerLink="">
+      <mat-icon>home</mat-icon>
+    </button>
+  </div>
+</div>

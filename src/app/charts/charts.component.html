@@ -1,0 +1,45 @@
+<div class="container-fluid">
+  <h1 class="title">{{questData.name}}</h1>
+  <div class="result-section">
+  <mat-accordion multi>
+    <div class="intro-panel" >
+      <mat-expansion-panel hideToggle [(expanded)]="introOpen" >
+        <mat-expansion-panel-header>
+          <mat-panel-title> 問卷說明</mat-panel-title>
+        </mat-expansion-panel-header>
+        <p>{{questData.description}}</p>
+      </mat-expansion-panel >
+    </div>
+    @for (quest of  newArray; track $index) {
+        <mat-expansion-panel #panel (opened)="panelOpenState.set(true); handlePanelOpen ()" (closed)="panelOpenState.set(false)">
+          <mat-expansion-panel-header>
+            <mat-panel-title > {{quest.question}} </mat-panel-title>
+            @if(!panel.expanded){
+              <mat-panel-description> <p>最多人選擇 <span class="maxVote-desc">{{ getMostVotedData(quest).maxVoteLabel}}</span>，得票數為<span class="maxVote-desc">{{getMostVotedData(quest).maxVote}}票</span></p></mat-panel-description>
+            }
+          </mat-expansion-panel-header>
+          <div class="chart-box" [class.bar-chart]="quest.type == 'text'">
+            <canvas id="{{ quest.questionId}}" ></canvas>
+            <div class="legend">
+            @for(item of   getLegendData(quest); track $index){
+                <div class="legend-item">
+                  <span class="dot" [style.background]="item.color"></span>
+                  <span class="label">{{ item.label }} ({{item.percent}}%)</span>
+                </div>
+              }
+            </div>
+          </div>
+          <p>最多人選擇<span class="maxVote">{{ getMostVotedData(quest).maxVoteLabel}}</span>，得票數為<span class="maxVote">{{getMostVotedData(quest).maxVote}}票</span></p>
+        </mat-expansion-panel>
+
+      }
+  </mat-accordion>
+</div>
+
+<button type="button" matTooltip="回首頁" [matTooltipPosition]="'left'" [matTooltipShowDelay]="1000" class="home-btn" (click)="toList()">
+  <mat-icon  >home</mat-icon>
+</button>
+</div>
+
+
+<!-- (click)="toList()" -->

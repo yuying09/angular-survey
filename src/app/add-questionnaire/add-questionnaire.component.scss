@@ -1,0 +1,224 @@
+.container-fluid {
+  padding-top: 20px;
+}
+
+.form-group {
+  width: 80%;
+  padding: 30px;
+  margin: 0 auto;
+  border: 1px solid #BCDFFB;
+  border-radius: 5px;
+  background: #EAF6FD;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.form-field {
+  position: relative;
+  label {
+    margin-right: 20px;
+    align-self: center;
+  }
+
+  input,
+  textarea,
+  select {
+    width: 200px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+}
+
+.form-card{
+  display: flex;
+
+  label {
+    align-self: center;
+  }
+}
+
+//錯誤提示位置
+.error-title,.error-startTime,.error-endTime{
+  position: absolute;
+  left: 85px;
+  top: 43px;
+}
+
+
+.question-card {
+  border: 1px solid #003049;
+  border-radius: 5px;
+  padding: 30px;
+  margin-bottom: 20px;
+  background-color: #d6edfc;
+}
+
+.submit-btn {
+  align-self: center;
+  background-color:#669bbc;
+  color: #fff;
+  border-radius: 8px;
+  width: 96px;
+
+  &:hover{
+    background-color: #219ebc;
+    transform: translateY(-0.5px);
+  }
+}
+
+.question-header{
+  display: flex;
+  align-items: flex-end;
+  gap:5px;
+  .question-num{
+    align-self: center;
+  }
+  select{
+    width: 130px;
+    height: 41px;
+  }
+}
+
+.delete-btn {
+  border: none;
+  background:transparent;
+  width: 40px;
+  height: 40px;
+  padding-top: 10px;
+  color: #d9534f;
+}
+
+.delete-icon {
+  width: 30px;
+  height: 30px;
+
+}
+
+
+.option-group{
+  label {
+    margin-right: 20px;
+    align-self: center;
+  }
+  input {
+    width: 200px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+}
+
+.option-list{
+  position: relative;//控制錯誤提示的位置
+  padding-top: 20px;
+}
+
+
+.option-row {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 4px;
+  gap:5px;
+
+  .choose-box {
+    width: 60px;
+    align-self: center;
+  }
+
+  input {
+    width: 200px;
+  }
+}
+
+
+.add-btn {
+  margin-top:  40px;
+  background-color: #a3a3a3;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 16px;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #858585;
+    transform: translateY(-0.5px);
+  }
+
+  &:focus {
+    background-color: #3333;
+    color: #fff;
+    outline: none;
+  }
+}
+
+//錯誤提示設計
+.error-border{
+  border-color: #e53935 !important;
+  box-shadow: 0 0 0 2px rgba(229, 57, 53, 0.1);}
+
+.error-text{
+  color: #e53935;
+  font-size: 14px;
+  margin-top: 4px;
+
+  //動畫效果
+  opacity: 0;
+  transform: translateY(-4px);// 初始位置往上 4px，有個位移效果
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out; // 當狀態變化時要動畫處理 opacity 和 transform
+}
+
+.error-text.show{
+  opacity: 1;
+  transform: translateY(0);
+
+}
+
+.error-quest {
+  position: relative; // 控制錯誤提示的位置
+  min-height: 20px; // 保留空間避免跳動
+}
+
+
+//設定錯誤提示位置
+.error-quest-name {
+  position: absolute;
+  left: 65px;
+}
+
+.error-quest-type {
+  position: absolute;
+  right:100px;
+}
+
+.error-options{
+  position: absolute;
+  left: 60px;
+}
+
+.home-btn{
+  position:fixed;
+  right: 60px;
+  bottom: 10px;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #219ebc;
+  color: white;
+  transition: background-color 0.3s ease-in-out;
+  &:hover {
+    background-color: #219ebc;
+  }
+}
+
