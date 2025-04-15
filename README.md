@@ -1,59 +1,55 @@
-# Questionnaire
+# 📝 Angular Survey 問卷系統
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.1.
+這是一個使用 **Angular + Angular Material** 製作的互動式問卷系統，支援問卷新增、登入驗證、刪除功能與表單動畫提示。
+配色以奶油色調為主，搭配溫柔的湖水藍互動設計，呈現出乾淨柔和的使用體驗。
 
-## Development server
+👉 [點我查看 Demo 頁面](https://yuying09.github.io/angular-survey)
 
-To start a local development server, run:
+---
 
-```bash
-ng serve
-```
+## ✨ 功能介紹
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- 🔐 管理者登入（假資料驗證）
+- 🧾 問卷列表顯示（Mat Table 呈現）
+- ➕ 問卷新增（支援單選 / 多選 / 簡答題）
+- 🗑️ 問卷刪除（登入管理員後才可操作）
+- ✅ 表單驗證：即時錯誤提示 + 淡入淡出動畫
+- 🎨 奶油風 UI：溫柔藍主色搭配柔和紅錯誤提示
+- 📦 GitHub Pages 靜態頁面部署
 
-## Code scaffolding
+---
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 🛠 使用技術
 
-```bash
-ng generate component component-name
-```
+- Angular 17
+- Angular Material (Mat Table, Mat Icon, Mat Dialog,...)
+- TypeScript
+- Bootstrap 5（部分樣式輔助）
+- HTML / SCSS
+- GitHub Pages
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
 
-```bash
-ng generate --help
-```
+## 📷 預覽畫面
 
-## Building
+> （你可以在這裡放上幾張代表性畫面：登入頁、新增問卷頁、錯誤提示動畫）
 
-To build the project run:
+---
 
-```bash
-ng build
-```
+## 📌 備註
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+- ✅ 本專案尚未支援 RWD（響應式設計）
+- 📋 資料皆使用本地假資料模擬，尚未串接後端 API
+- 🌿 預設登入帳密為：
+  - 帳號：`test@email.com`
+  - 密碼：`123456`
 
-## Running unit tests
+---
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## 🚀 部署方式
 
-```bash
-ng test
-```
+使用 GitHub Pages 部署，公開網址：
+👉 https://yuying09.github.io/angular-survey
 
-## Running end-to-end tests
+---
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
